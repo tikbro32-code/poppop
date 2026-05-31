@@ -1,0 +1,5 @@
+{
+  "name": "Poppro",
+  "description": "Vertical Video Platform + AI Creator Tools + Monetization.",
+  "requestFramePermissions": ["geolocation", "camera", "microphone"]
+}

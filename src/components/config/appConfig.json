@@ -1,0 +1,29 @@
+{
+  "appProps": {
+    "name": "Poppro",
+    "region": "MY",
+    "version": "1.0.0",
+    "idcRegion": "ALL_SG"
+  },
+  "cookieBanner": {
+    "title": "Manage cookies",
+    "subTitle": "We use cookies to improve our services. Essential cookies are necessary for our site to work as intended.",
+    "description": "By selecting \"Allow all\", you allow us to use optional cookies for additional purposes, such as measuring the effectiveness and relevance of ads. Optional cookies also help us better measure the performance of our advertising campaigns.",
+    "btnAccept": "Allow all",
+    "btnDecline": "Decline optional cookies",
+    "policyUrl": "https://www.poppro.com/legal/cookies-policy",
+    "settings": [
+      {
+        "groupName": "Optional cookies",
+        "enabled": true,
+        "description": "Used for measuring the effectiveness and relevance of ads."
+      },
+      {
+        "groupName": "Essential cookies",
+        "enabled": true,
+        "disabled": true,
+        "description": "Necessary for the site to work as intended."
+      }
+    ]
+  }
+}
