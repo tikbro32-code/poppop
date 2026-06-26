@@ -31,7 +31,7 @@ export default function LoginModal({ onClose }: Props) {
       onClose();
       navigate('/');
     } catch (err: any) {
-      console.error("OAuth Login Error:", err);
+      console.warn("OAuth Login Error:", err.message);
       setError(err.message || "Failed to log in. Please try again.");
     } finally {
       setIsLoading(false);
@@ -106,14 +106,19 @@ export default function LoginModal({ onClose }: Props) {
         <div className="flex-1 px-8 pb-10 flex flex-col items-center overflow-y-auto scrollbar-hide">
           <h2 className="text-[28px] md:text-[32px] font-bold text-black mb-10 mt-4 text-center leading-tight">Log masuk ke Poppro</h2>
 
-          {error && (
-            <div className="w-full mb-6 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm text-center">
-              {error}
+           {error && (
+            <div className="w-full mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm flex flex-col gap-3">
+              <p className="font-bold text-center">
+                Login Error
+              </p>
+              <p className="text-xs leading-relaxed text-center">
+                {error}
+              </p>
             </div>
           )}
 
           <div className="w-full space-y-3 px-2 mb-10">
-            {loginButtons.slice(0, 3).map((btn, index) => (
+            {loginButtons.slice(0, 4).map((btn, index) => (
               <button
                 key={index}
                 onClick={btn.onClick}

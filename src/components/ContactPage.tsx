@@ -183,7 +183,7 @@ export default function ContactPage() {
             <div className="flex gap-8 text-sm font-bold text-gray-500">
                <span className="hover:underline cursor-pointer">Terms of Service</span>
                <span className="hover:underline cursor-pointer">Privacy</span>
-               <span className="hover:underline cursor-pointer">Intellectual Property Policy</span>
+               <Link to="/intellectual-property" className="hover:underline cursor-pointer">Intellectual Property Policy</Link>
                <span className="hover:underline cursor-pointer">Law Enforcement</span>
             </div>
             <div className="text-[14px] text-gray-400 font-medium">

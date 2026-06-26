@@ -113,50 +113,74 @@ export default function PublishPage() {
     setError(null);
 
     try {
-      const token = await user.getIdToken();
-      
+      const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dzklu1b0x';
+      const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || 'my_video_upload';
+
+      // Upload file to Cloudinary
       const formData = new FormData();
-      formData.append('video', selectedFile);
-      
-      const vResponse = await fetch('/api/upload/video', {
+      formData.append('file', selectedFile);
+      formData.append('upload_preset', uploadPreset);
+
+      let simulatedProgress = 10;
+      const progressInterval = setInterval(() => {
+        simulatedProgress += 5;
+        if (simulatedProgress <= 90) {
+          setUploadProgress(simulatedProgress);
+        }
+      }, 500);
+
+      const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/video/upload`, {
         method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`
-        },
-        body: formData
+        body: formData,
       });
 
-      if (!vResponse.ok) throw new Error('Gagal memuat naik video');
-      const vData = await vResponse.json();
-      setUploadProgress(60);
+      clearInterval(progressInterval);
 
-      const createResponse = await fetch('/api/videos', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          author: user.displayName || user.email?.split('@')[0] || 'User',
-          authorUid: user.uid,
-          description: caption,
-          category: category,
-          url: vData.url,
-          thumbnail: vData.thumbnailUrl || 'https://picsum.photos/seed/vid/400/800'
-        })
-      });
+      if (!response.ok) {
+        const errData = await response.json();
+        throw new Error(errData.error?.message || "Gagal memuat naik ke Cloudinary.");
+      }
 
-      if (!createResponse.ok) throw new Error('Gagal menyimpan maklumat video');
-      
+      const data = await response.json();
+      const publicUrl = data.secure_url;
+      setUploadProgress(95);
+
+      // Save video metadata to localStorage instead of Supabase
+      const newVideo = {
+        id: Math.random().toString(36).substring(7),
+        url: publicUrl,
+        author: user.displayName || user.email?.split('@')[0] || 'User',
+        authorUid: user.uid,
+        likes: "0",
+        comments: "0",
+        shares: "0",
+        views: "0",
+        description: caption,
+        category: category,
+        thumbnail: publicUrl.replace(/\.[^/.]+$/, ".jpg"),
+        aspectRatio: "9:16"
+      };
+
+      try {
+        const storedVideos = localStorage.getItem('poppro_local_videos');
+        let localVideos = [];
+        if (storedVideos) {
+          localVideos = JSON.parse(storedVideos);
+        }
+        localVideos.unshift(newVideo);
+        localStorage.setItem('poppro_local_videos', JSON.stringify(localVideos));
+      } catch (e) {
+        console.warn('Failed to save to local storage', e);
+      }
+
       setUploadProgress(100);
       setTimeout(() => {
-        navigate('/manage-videos');
+        navigate('/');
       }, 500);
 
     } catch (err: any) {
-      console.error("Upload Error:", err);
+      console.warn("Upload Error:", err.message);
       setError(err.message || "Gagal memuat naik. Sila cuba lagi.");
-    } finally {
       setIsUploading(false);
     }
   };

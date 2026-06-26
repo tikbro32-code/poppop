@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, Outlet } from 'react-router-dom';
 import { 
   Shield, 
   Zap, 
@@ -58,11 +58,7 @@ import ClockApp from './ClockApp';
 import NotepadApp from './NotepadApp';
 import MapApp from './MapApp';
 
-interface MainLayoutProps {
-  children: React.ReactNode;
-}
-
-export default function MainLayout({ children }: MainLayoutProps) {
+export default function MainLayout() {
   const { user, logout } = useAuth();
   const { isLoginModalOpen, openLoginModal, closeLoginModal, isSearchOpen, openSearch } = useUI();
   const location = useLocation();
@@ -144,9 +140,9 @@ export default function MainLayout({ children }: MainLayoutProps) {
     },
     { icon: UserCheck, labelGreen: 'Hun', labelWhite: 'ter', path: '/hunter' },
     { icon: Compass, labelGreen: 'Exp', labelWhite: 'lore', path: '/explore' },
-    { icon: UserCheck, labelGreen: 'Fri', labelWhite: 'ends', path: '/friends' },
-    { icon: Shield, labelGreen: 'Trans', labelWhite: 'parency', path: '/transparency' },
-    { 
+    ...(user ? [{ icon: UserCheck, labelGreen: 'Fri', labelWhite: 'ends', path: '/friends' }] : []),
+    ...(user ? [{ icon: Shield, labelGreen: 'Trans', labelWhite: 'parency', path: '/transparency' }] : []),
+    ...(user ? [{ 
       icon: LayoutDashboard, 
       labelGreen: 'Work', 
       labelWhite: 'space', 
@@ -154,11 +150,11 @@ export default function MainLayout({ children }: MainLayoutProps) {
       subItems: [
         { icon: Book, labelGreen: 'Boo', labelWhite: 'ks', path: '/books' }
       ]
-    },
+    }] : []),
     { icon: Video, labelGreen: 'LI', labelWhite: 'VE', path: '/live' },
-    { icon: Upload, labelGreen: 'Pub', labelWhite: 'lish', path: '/editor' },
-    { icon: Activity, labelGreen: 'Mon', labelWhite: 'itor', path: '/monitor' },
-    { icon: User, labelGreen: 'Pro', labelWhite: 'file', path: '/profile' },
+    ...(user ? [{ icon: Upload, labelGreen: 'Pub', labelWhite: 'lish', path: '/editor' }] : []),
+    ...(user ? [{ icon: Activity, labelGreen: 'Mon', labelWhite: 'itor', path: '/monitor' }] : []),
+    ...(user ? [{ icon: User, labelGreen: 'Pro', labelWhite: 'file', path: '/profile' }] : []),
   ];
 
   const moreMenuGroups = [
@@ -209,19 +205,16 @@ export default function MainLayout({ children }: MainLayoutProps) {
 
   return (
     <div className="flex flex-col md:flex-row h-[100dvh] bg-[var(--bg-dark)] text-[var(--text-main)] overflow-hidden transition-colors duration-500 justify-between">
-      <aside className="hidden md:flex w-[240px] flex-shrink-0 flex-col pt-2 pb-4 px-2 overflow-y-auto scrollbar-hide bg-[var(--bg-dark)] border-r border-[var(--border-color)]">
+      <aside className={`hidden md:flex w-[240px] flex-shrink-0 flex-col pt-2 pb-4 px-2 overflow-y-auto scrollbar-hide bg-[var(--bg-dark)] border-r border-[var(--border-color)] ${location.pathname === '/settings' ? '!hidden' : ''}`}>
         <div className="mb-0 px-2">
-          <a href="/" className="flex items-center gap-2 mb-2">
-            <span className="text-2xl font-black italic tracking-tighter">
-              <span className="text-[var(--primary-green)]">Pop</span>
-              <span className="text-[var(--text-main)]">pro</span>
-            </span>
-          </a>
+          <Link to="/" className="flex items-center gap-2 mb-2">
+            <Logo size="md" />
+          </Link>
           
           <div className="mb-2 relative">
             <input
               type="text"
-              placeholder="Search"
+              placeholder="sila_masukkan_carian_kata_kunci"
               className="w-full bg-[var(--bg-dark)] border border-[var(--border-color)] rounded-lg py-1 px-4 outline-none transition-all text-sm"
             />
           </div>
@@ -425,9 +418,11 @@ export default function MainLayout({ children }: MainLayoutProps) {
                             onClick={() => {
                               if (item.isLanguage) {
                                 setIsLanguageMenuOpen(true);
-                              }
-                              if (item.isThemeToggle) {
+                              } else if (item.isThemeToggle) {
                                 toggleTheme();
+                              } else if (item.action === 'studio' || item.labelWhite.includes('effects') || item.labelGreen.includes('Create')) {
+                                navigate('/studio');
+                                setIsMoreMenuOpen(false);
                               }
                             }}
                             className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-[var(--bg-dark)] transition-colors text-left group"
@@ -557,14 +552,14 @@ export default function MainLayout({ children }: MainLayoutProps) {
                       >
                         <Link to="/for-good" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Poppro for Good</Link>
                         <Link to="/ads" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Ads</Link>
-                        <Link to="#" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Sell on Poppro Shop</Link>
-                        <Link to="#" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Poppro LIVE Agency</Link>
-                        <Link to="#" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Developers</Link>
-                        <Link to="/transparency" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Transparency</Link>
-                        <Link to="#" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Poppro Embeds</Link>
-                        <Link to="#" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">SoundOn Music Distribution</Link>
+                        <Link to="/seller" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Sell on Poppro Shop</Link>
+                        <Link to="/live-agency" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Poppro LIVE Agency</Link>
+                        <Link to="/developers" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Developers</Link>
+                        {user && <Link to="/transparency" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Transparency</Link>}
+                        <Link to="/embeds" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Poppro Embeds</Link>
+                        <Link to="/soundon" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">SoundOn Music Distribution</Link>
                         <Link to="/live" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Poppro Live</Link>
-                        <Link to="#" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Poppro Shop</Link>
+                        <Link to="/shop" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Poppro Shop</Link>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -593,7 +588,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
                         <Link to="/support/privacy-safety" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Privacy Center</Link>
                         <Link to="#" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Creator Academy</Link>
                         <Link to="/new-user-guide" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Community Guidelines</Link>
-                        <Link to="#" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Copyright</Link>
+                        <Link to="/intellectual-property" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Copyright</Link>
                         <Link to="#" className="text-[11px] font-normal text-[var(--text-secondary)] hover:underline whitespace-nowrap">Law Enforcement Guidelines</Link>
                       </motion.div>
                     )}
@@ -709,6 +704,19 @@ export default function MainLayout({ children }: MainLayoutProps) {
                         className="absolute top-full right-0 mt-2 w-[220px] bg-[var(--sidebar-bg)] border border-[var(--border-color)] rounded-xl shadow-2xl overflow-hidden z-50"
                       >
                         <div className="py-1">
+                          <button 
+                            onClick={() => {
+                              setIsHeaderMoreMenuOpen(false);
+                              navigate('/profile');
+                            }}
+                            className="w-full flex items-center gap-3 px-4 py-3 hover:bg-[var(--bg-dark)] transition-colors text-left group"
+                          >
+                            <User size={20} className="text-[var(--text-secondary)] group-hover:text-[var(--primary-green)] transition-colors" />
+                            <span className="text-base font-bold tracking-tight">
+                              <span className="text-[var(--primary-green)]">View </span>
+                              <span className="text-[var(--text-main)]">profile</span>
+                            </span>
+                          </button>
                           <button 
                             onClick={() => {
                               setIsHeaderMoreMenuOpen(false);
@@ -872,7 +880,11 @@ export default function MainLayout({ children }: MainLayoutProps) {
         </header>
 
         {!((location.pathname === '/profile' || location.pathname === '/shop' || location.pathname === '/messages' || location.pathname.startsWith('/@'))) && (
-          <header className="md:hidden sticky top-0 left-0 right-0 flex items-center justify-between px-4 py-3 z-50 bg-black border-b border-white/5">
+          <header className={`md:hidden ${
+            location.pathname === '/' 
+              ? 'absolute top-0 left-0 right-0 bg-gradient-to-b from-black/80 via-black/20 to-transparent border-none' 
+              : 'sticky top-0 bg-black border-b border-white/5'
+          } flex items-center justify-between px-4 py-3 z-50`}>
             <div className="flex-1 flex justify-start">
               {location.pathname === '/' ? (
                  <div className="w-8 h-8">
@@ -935,13 +947,15 @@ export default function MainLayout({ children }: MainLayoutProps) {
                       <span className="text-white">ber</span>
                     </span>
                   </button>
-                  <Link to="/transparency" className={`relative flex flex-col items-center ${isActive('/transparency') ? '' : 'opacity-60'}`}>
-                    <span className="text-[15px] font-bold transition-colors">
-                      <span className="text-[var(--primary-green)]">Tr</span>
-                      <span className="text-white">ans</span>
-                    </span>
-                    {isActive('/transparency') && <div className="absolute -bottom-2 w-5 h-[3px] bg-[var(--primary-green)] rounded-full"></div>}
-                  </Link>
+                  {user && (
+                    <Link to="/transparency" className={`relative flex flex-col items-center ${isActive('/transparency') ? '' : 'opacity-60'}`}>
+                      <span className="text-[15px] font-bold transition-colors">
+                        <span className="text-[var(--primary-green)]">Tr</span>
+                        <span className="text-white">ans</span>
+                      </span>
+                      {isActive('/transparency') && <div className="absolute -bottom-2 w-5 h-[3px] bg-[var(--primary-green)] rounded-full"></div>}
+                    </Link>
+                  )}
                 </div>
               )}
             </div>
@@ -954,33 +968,28 @@ export default function MainLayout({ children }: MainLayoutProps) {
           </header>
         )}
 
-        <main className={`flex-1 overflow-y-auto pb-[76px] md:pb-0 flex flex-col scrollbar-hide transition-colors duration-200 ${
+        <main className={`flex-1 flex flex-col scrollbar-hide transition-colors duration-200 ${
+          location.pathname === '/' ? 'overflow-hidden' : 'overflow-y-auto pb-[76px] md:pb-0'
+        } ${
           (location.pathname === '/profile' || location.pathname === '/shop' || location.pathname === '/messages' || location.pathname.startsWith('/@')) 
             ? 'bg-white' 
             : 'bg-[var(--bg-dark)]'
         }`}>
-          {children}
+          <Outlet />
         </main>
 
         <nav className={`md:hidden fixed bottom-0 left-0 right-0 flex items-center justify-around px-2 pt-2 pb-6 z-50 border-t transition-colors duration-200 ${
           (location.pathname === '/profile' || location.pathname === '/shop' || location.pathname === '/messages' || location.pathname.startsWith('/@')) 
             ? 'bg-white border-gray-100' 
-            : 'bg-black border-white/5'
-        }`}>
+            : (location.pathname === '/' ? 'bg-black/30 backdrop-blur-md border-transparent' : 'bg-black border-white/5')
+        } ${location.pathname === '/settings' ? '!hidden' : ''}`}>
           <Link to="/" className={`flex flex-col items-center transition-colors ${
             (location.pathname === '/profile' || location.pathname === '/shop' || location.pathname === '/messages' || location.pathname.startsWith('/@'))
               ? (isActive('/') ? 'text-black' : 'text-gray-400')
               : (isActive('/') ? 'text-white' : 'text-white/60')
           }`}>
             <Home size={26} strokeWidth={isActive('/') ? 2.5 : 2} />
-            <span className="text-[10px] mt-1 font-medium">
-              <span className="text-[var(--primary-green)]">Recom</span>
-              <span className={
-                (location.pathname === '/profile' || location.pathname === '/shop' || location.pathname === '/messages' || location.pathname.startsWith('/@'))
-                  ? (isActive('/') ? 'text-black' : 'text-gray-400')
-                  : (isActive('/') ? 'text-white' : 'text-white/60')
-              }>mendation</span>
-            </span>
+            <span className="text-[10px] mt-1 font-medium text-center whitespace-nowrap">Home</span>
           </Link>
           <Link to="/friends" className={`flex flex-col items-center transition-colors ${
             (location.pathname === '/profile' || location.pathname === '/shop' || location.pathname === '/messages' || location.pathname.startsWith('/@'))
@@ -988,14 +997,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
               : (isActive('/friends') ? 'text-white' : 'text-white/60')
           }`}>
             <UserCheck size={25} strokeWidth={isActive('/friends') ? 2.5 : 2} />
-            <span className="text-[10px] mt-1 font-medium">
-              <span className="text-[var(--primary-green)]">Fri</span>
-              <span className={
-                (location.pathname === '/profile' || location.pathname === '/shop' || location.pathname === '/messages' || location.pathname.startsWith('/@'))
-                  ? (isActive('/friends') ? 'text-black' : 'text-gray-400')
-                  : (isActive('/friends') ? 'text-white' : 'text-white/60')
-              }>ends</span>
-            </span>
+            <span className="text-[10px] mt-1 font-medium text-center whitespace-nowrap">Friends</span>
           </Link>
           <Link 
             to="/upload" 
@@ -1035,14 +1037,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
                 : (isActive('/activity') ? 'text-white' : 'text-white/60')
           }`}>
             <Bell size={26} strokeWidth={isActive('/activity') ? 2.5 : 2} fill={isActive('/activity') ? 'currentColor' : 'none'} />
-            <span className="text-[10px] mt-1 font-medium">
-              <span className="text-[var(--primary-green)]">In</span>
-              <span className={
-                (location.pathname === '/profile' || location.pathname === '/shop' || location.pathname === '/messages' || location.pathname.startsWith('/@'))
-                  ? (isActive('/activity') ? 'text-black' : 'text-gray-400')
-                  : (isActive('/activity') ? 'text-white' : 'text-white/60')
-              }>box</span>
-            </span>
+            <span className="text-[10px] mt-1 font-medium text-center whitespace-nowrap">Inbox</span>
           </Link>
           <Link 
             to="/profile" 
@@ -1059,14 +1054,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
             }`}
           >
             <User size={26} strokeWidth={isActive('/profile') ? 2.5 : 2} fill={isActive('/profile') && (location.pathname === '/profile' || location.pathname.startsWith('/@')) ? 'currentColor' : 'none'} />
-            <span className="text-[10px] mt-1 font-medium">
-              <span className="text-[var(--primary-green)]">Pro</span>
-              <span className={
-                (location.pathname === '/profile' || location.pathname === '/shop' || location.pathname === '/messages' || location.pathname.startsWith('/@'))
-                  ? (isActive('/profile') ? 'text-black' : 'text-gray-400')
-                  : (isActive('/profile') ? 'text-white' : 'text-white/60')
-              }>file</span>
-            </span>
+            <span className="text-[10px] mt-1 font-medium text-center whitespace-nowrap">Profile</span>
           </Link>
         </nav>
       </div>

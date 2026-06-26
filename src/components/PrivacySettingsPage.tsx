@@ -2,94 +2,14 @@ import React from 'react';
 import { Search, ChevronDown, ArrowRight, Globe, Linkedin, Youtube, Instagram, Video, ArrowLeft, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Logo from './Logo';
+import SafetyNav from './SafetyNav';
 
 export default function PrivacySettingsPage() {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-white text-[#121212] font-sans">
-      <nav className="flex items-center justify-between px-6 py-4 bg-white sticky top-0 z-50 border-b border-gray-100">
-        <div className="flex items-center gap-4">
-          <button onClick={() => navigate(-1)} className="p-2 rounded-full hover:bg-gray-100 transition-colors">
-            <ArrowLeft size={24} className="text-black" />
-          </button>
-          <Logo />
-        </div>
-        
-        <div className="hidden lg:flex items-center gap-8 text-[15px] font-semibold">
-          <div className="relative group">
-            <div className="flex items-center gap-1 cursor-pointer border-b-2 border-transparent pb-1 text-black hover:text-gray-600 transition-colors">
-              Alat & Panduan <ChevronDown size={18} className="text-gray-500 group-hover:rotate-180 transition-transform" />
-            </div>
-            <div className="absolute top-full left-0 pt-4 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-              <div className="w-[650px] bg-white border border-gray-200 rounded-2xl shadow-xl p-8">
-                <div className="grid grid-cols-2 gap-12">
-                  <div className="space-y-4">
-                    <h4 className="text-black font-bold text-xs tracking-wider">YOUR POPPRO EXPERIENCE</h4>
-                    <ul className="space-y-3 font-normal">
-                      {['New User Guide', 'Privacy & Content Settings', 'Customizing Your For You Feed', 'How to Share Your Stories Safely', 'How to Report', 'Inclusivity & Belonging Guide', 'Well-being Guide', 'Harmful Misinformation Guide'].map(item => (
-                        <li key={item}>
-                          <a href={item === 'New User Guide' ? '/new-user-guide' : item === 'Privacy & Content Settings' ? '/privacy-settings' : item === 'Customizing Your For You Feed' ? '/customizing-feed' : '#'} className="text-gray-600 hover:text-black hover:underline transition-colors block py-1">
-                            {item}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="space-y-8">
-                    <div className="space-y-4">
-                      <h4 className="text-black font-bold text-xs tracking-wider">TEENS & GUARDIANS</h4>
-                      <ul className="space-y-3 font-normal">
-                        {['Safety Center for Teens', 'Guardian\'s Guide'].map(item => (
-                          <li key={item}><a href="#" className="text-gray-600 hover:text-black hover:underline transition-colors block py-1">{item}</a></li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="space-y-4">
-                      <h4 className="text-black font-bold text-xs tracking-wider">LIVE</h4>
-                      <ul className="space-y-3 font-normal">
-                        <li><a href="#" className="text-gray-600 hover:text-black hover:underline transition-colors block py-1">Panduan Keselamatan LIVE</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-8 pt-6 border-t border-gray-100">
-                  <button className="bg-gray-100 text-black px-6 py-3 rounded-full font-bold hover:bg-gray-200 transition-colors w-fit">
-                    Gambaran Keseluruhan Alat & Panduan
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="relative group">
-            <div className="flex items-center gap-1 cursor-pointer hover:text-gray-600 pb-1 border-b-2 border-transparent transition-colors">
-              Sokongan Komuniti <ChevronDown size={18} className="text-gray-500 group-hover:rotate-180 transition-transform" />
-            </div>
-          </div>
-
-          <div className="relative group">
-            <div className="flex items-center gap-1 cursor-pointer hover:text-gray-600 pb-1 border-b-2 border-transparent transition-colors">
-              Ketelusan <ChevronDown size={18} className="text-gray-500 group-hover:rotate-180 transition-transform" />
-            </div>
-          </div>
-
-          <div className="relative group">
-            <div className="flex items-center gap-1 cursor-pointer hover:text-gray-600 pb-1 border-b-2 border-transparent transition-colors">
-              Dasar & Penglibatan <ChevronDown size={18} className="text-gray-500 group-hover:rotate-180 transition-transform" />
-            </div>
-          </div>
-        </div>
-
-        <div className="relative hidden md:block">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
-          <input 
-            type="text" 
-            placeholder="Cari" 
-            className="bg-[#f1f1f2] rounded-full py-2.5 pl-11 pr-4 text-[15px] focus:outline-none w-[240px] font-medium placeholder-gray-500" 
-          />
-        </div>
-      </nav>
+      <SafetyNav />
 
       <main className="pb-24">
         <div className="max-w-[1100px] mx-auto px-6 pt-12 pb-24">
@@ -198,11 +118,11 @@ export default function PrivacySettingsPage() {
               <h4 className="font-bold text-black mb-6 text-[14px] tracking-wide">PROGRAM</h4>
               <ul className="space-y-4 text-[14px] text-gray-600 font-medium">
                 <li><a href="#" className="hover:underline">BroPro for Good</a></li>
-                <li><a href="#" className="hover:underline">BroPro for Developers</a></li>
+                <li><a href="/developers" className="hover:underline">BroPro for Developers</a></li>
                 <li><a href="#" className="hover:underline">Effect House</a></li>
                 <li><a href="#" className="hover:underline">Iklankan di BroPro</a></li>
                 <li><a href="#" className="hover:underline">BroPro Browse</a></li>
-                <li><a href="#" className="hover:underline">BroPro Embeds</a></li>
+                <li><a href="/embeds" className="hover:underline">BroPro Embeds</a></li>
               </ul>
             </div>
             <div>

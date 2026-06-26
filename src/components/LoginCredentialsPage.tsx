@@ -21,7 +21,7 @@ export default function LoginCredentialsPage() {
     
     setTimeout(() => {
       setIsLoading(false);
-      setError("Email/Password login is not enabled in this demo. Please use social login (Google, Facebook, etc.)");
+      setError("Ciri log masuk ini belum tersedia buat masa ini. Sila gunakan log masuk rangkaian sosial.");
     }, 1500);
   };
 

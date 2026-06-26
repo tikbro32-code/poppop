@@ -261,7 +261,7 @@ export default function NewsroomPage() {
             <div className="flex flex-wrap justify-center gap-8 text-sm font-bold text-gray-500">
               <span>Terms of Service</span>
               <span>Privacy</span>
-              <span>Intellectual Property Policy</span>
+              <Link to="/intellectual-property" className="hover:underline cursor-pointer">Intellectual Property Policy</Link>
               <span>Law Enforcement</span>
             </div>
             <div className="text-[14px] text-gray-400 font-medium">

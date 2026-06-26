@@ -1,93 +1,82 @@
 import React from 'react';
-import { Search, ChevronDown, ArrowRight, Globe, Linkedin, Youtube, Instagram, Video, ArrowLeft } from 'lucide-react';
+import { ChevronDown, ArrowLeft, Globe, Video, Linkedin, Youtube, Instagram, ThumbsUp, ThumbsDown } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 import SafetyNav from './SafetyNav';
 
-export default function NewUserGuidePage() {
+export default function InclusivityGuidePage() {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-white text-[#121212] font-sans">
       <SafetyNav />
 
-      <div className="max-w-[1100px] mx-auto px-6 pt-16 pb-20 grid md:grid-cols-2 gap-12 items-center">
-        <div className="space-y-6 pr-4">
-          <h3 className="text-[#00f2ea] font-bold text-sm tracking-wide uppercase">TETAPAN PRIVASI & KANDUNGAN</h3>
-          <h1 className="text-[56px] md:text-[72px] font-bold tracking-tight text-black leading-[1.1]">
-            Urus privasi<br />anda
+      <main className="max-w-[1000px] mx-auto px-6 pt-16 pb-32">
+        <div className="bg-[#FFE500] rounded-[32px] p-12 md:p-20 mb-16">
+          <h1 className="text-5xl md:text-[80px] font-bold tracking-tight text-black leading-none">
+            Panduan Keterangkuman & Kekitaan
           </h1>
-          <p className="text-[17px] text-gray-800 max-w-[400px] leading-relaxed">
-            Terokai tetapan dan kawalan akaun yang membantu anda melindungi privasi anda dan memastikan maklumat anda selamat.
-          </p>
-        </div>
-        <div className="rounded-[32px] overflow-hidden">
-          <img 
-            src="https://images.unsplash.com/photo-1555243896-c709bfa0b564?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-            alt="Privacy" 
-            className="w-full h-[540px] object-cover"
-            referrerPolicy="no-referrer"
-          />
-        </div>
-      </div>
-
-      <div className="max-w-[1100px] mx-auto px-6 mb-24">
-        <div className="bg-[#f2e3c6] rounded-[32px] py-24 px-8 text-center">
-          <h3 className="text-black font-bold text-sm tracking-wide uppercase mb-6">TETAPAN KOMUNITI & KANDUNGAN</h3>
-          <h2 className="text-[40px] md:text-[52px] font-bold text-black mb-6 leading-[1.1]">
-            Kawalan<br />keselamatan &<br />privasi
-          </h2>
-          <p className="text-gray-900 text-[17px] max-w-[600px] mx-auto mb-10 leading-relaxed">
-            Tinjauan terperinci tentang tetapan dan kawalan akaun untuk membantu anda melindungi keselamatan dan privasi anda di Poppro.
-          </p>
-          <button className="border border-black text-black px-10 py-3.5 rounded-full font-semibold text-[15px] hover:bg-black hover:text-white transition-colors">
-            Terokai
-          </button>
-        </div>
-      </div>
-
-      <div className="max-w-[1100px] mx-auto px-6 mb-32">
-        <div className="text-center mb-14">
-          <h3 className="text-[#ff0050] font-bold text-sm tracking-wide uppercase mb-4">PRIVASI DI POPPRO</h3>
-          <h2 className="text-[40px] md:text-[48px] font-bold text-black">
-            Urus & lindungi privasi anda
-          </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 items-stretch">
-          <div className="rounded-[32px] overflow-hidden h-full">
-            <img 
-              src="https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-              alt="Basketball" 
-              className="w-full h-full object-cover min-h-[440px]"
-              referrerPolicy="no-referrer"
-            />
-          </div>
-          <div className="flex flex-col gap-6">
-            <div className="border border-gray-200 rounded-[32px] p-10 hover:shadow-md transition-shadow cursor-pointer flex-1 flex flex-col justify-center">
-              <h3 className="text-[24px] font-bold text-black mb-4">Panduan Privasi & Keselamatan</h3>
-              <p className="text-gray-700 text-[16px] mb-8 leading-relaxed">
-                Terokai alat untuk melindungi log masuk anda, mengurus pilihan privasi dan memastikan maklumat peribadi anda selamat.
+        <div className="max-w-[800px] mx-auto">
+          <div className="prose prose-lg text-[#121212]">
+            <p className="mb-16 leading-relaxed">
+              Di Poppro, kami percaya bahawa setiap suara berhak didengari. Keterangkuman dan kekitaan adalah teras kepada komuniti kami yang pelbagai dan kreatif. Panduan ini bertujuan untuk memberikan pandangan tentang cara kami membina persekitaran yang mengalu-alukan semua orang, tanpa mengira latar belakang, identiti, atau pengalaman mereka.
+            </p>
+
+            <h2 className="text-[32px] font-bold mb-8 leading-tight tracking-tight">Komitmen Kami Terhadap Kepelbagaian</h2>
+            
+            <p className="mb-8 leading-relaxed">
+              Kami berdedikasi untuk memupuk komuniti global di mana pengguna berasa selamat untuk menyatakan diri mereka secara tulen. Ini bermakna kami secara aktif menentang diskriminasi, ucapan kebencian, dan sebarang bentuk gangguan yang menyasarkan individu berdasarkan kaum, etnik, agama, keupayaan, orientasi seksual, atau identiti jantina.
+            </p>
+
+            <h2 className="text-[32px] font-bold mb-8 tracking-tight">Membina Ruang Yang Selamat</h2>
+            
+            <p className="mb-6 leading-relaxed">
+              Kesejahteraan komuniti kami adalah keutamaan kami. Kami menggunakan gabungan teknologi dan semakan manusia untuk memantau dan membuang kandungan yang melanggar Garis Panduan Komuniti kami. Kami juga memperkasakan pengguna dengan alat untuk mengurus pengalaman mereka:
+            </p>
+            
+            <ul className="list-disc pl-6 mb-16 space-y-4 text-gray-800">
+              <li className="leading-relaxed">
+                <strong>Kawalan Komen:</strong> Pengguna boleh menapis atau mengehadkan komen pada video mereka untuk mencegah interaksi negatif.
+              </li>
+              <li className="leading-relaxed">
+                <strong>Penyekatan dan Pelaporan:</strong> Menyediakan cara mudah untuk menyekat pengguna lain atau melaporkan kandungan yang tidak wajar.
+              </li>
+              <li className="leading-relaxed">
+                <strong>Gesaan Kebaikan:</strong> Ciri yang menggalakkan pengguna untuk mempertimbangkan semula sebelum memuat naik komen yang mungkin menyinggung perasaan.
+              </li>
+            </ul>
+
+            <h2 className="text-[32px] font-bold mb-8 tracking-tight">Menyokong Pencipta Yang Pelbagai</h2>
+            
+            <p className="mb-8 leading-relaxed">
+              Kami meraikan pelbagai pencipta yang menjadikan Poppro tempat yang unik. Melalui pelbagai program dan inisiatif, kami berusaha untuk menonjolkan suara-suara yang kurang diwakili dan menyediakan mereka dengan sumber yang mereka perlukan untuk berkembang maju di platform kami.
+            </p>
+
+            <div className="bg-gray-50 p-8 rounded-2xl mb-16">
+              <h3 className="font-bold text-lg mb-4">Pusat Keselamatan & Sumber</h3>
+              <p className="mb-4 text-sm leading-relaxed">
+                Untuk maklumat lanjut tentang dasar kami dan alat yang tersedia untuk melindungi diri anda, sila lawati <a href="#" className="underline font-semibold text-black">Pusat Keselamatan Poppro</a>.
               </p>
-              <div className="flex items-center gap-2 text-black font-bold mt-auto text-[15px]">
-                Terokai <ArrowRight className="w-5 h-5" />
-              </div>
             </div>
 
-            <div className="border border-gray-200 rounded-[32px] p-10 hover:shadow-md transition-shadow cursor-pointer flex-1 flex flex-col justify-center">
-              <h3 className="text-[24px] font-bold text-black mb-4">Pusat Privasi Global Poppro</h3>
-              <p className="text-gray-700 text-[16px] mb-8 leading-relaxed">
-                Fahami cara kami mengumpul, menggunakan dan melindungi data peribadi serta cari alatan dan sumber untuk menyokong pengalaman Poppro anda.
-              </p>
-              <div className="flex items-center gap-2 text-black font-bold mt-auto text-[15px]">
-                Terokai <ArrowRight className="w-5 h-5" />
+            <div className="flex items-center justify-between border-t border-gray-200 pt-8">
+              <span className="font-semibold">Adakah ini membantu?</span>
+              <div className="flex gap-4">
+                <button className="flex items-center gap-2 px-6 py-2 border border-gray-200 rounded-full hover:bg-gray-50 transition-colors font-medium">
+                  <ThumbsUp size={18} /> Ya
+                </button>
+                <button className="flex items-center gap-2 px-6 py-2 border border-gray-200 rounded-full hover:bg-gray-50 transition-colors font-medium">
+                  <ThumbsDown size={18} /> Tidak
+                </button>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </main>
 
-      <footer className="border-t border-gray-200 bg-white pt-16 pb-12 px-6">
+      <footer className="border-t border-gray-200 bg-white pt-16 pb-12 px-6 mt-20">
         <div className="max-w-[1100px] mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-6">
             <Logo />
@@ -137,7 +126,7 @@ export default function NewUserGuidePage() {
               <ul className="space-y-4 text-[14px] text-gray-600 font-medium">
                 <li><a href="#" className="hover:underline">Terma Perkhidmatan</a></li>
                 <li><a href="#" className="hover:underline">Dasar Privasi</a></li>
-                <li><a href="#" className="hover:underline">Dasar Harta Intelek</a></li>
+                <li><a href="/intellectual-property" className="hover:underline">Dasar Harta Intelek</a></li>
                 <li><a href="#" className="hover:underline">Garis Panduan Penguatkuasaan</a></li>
                 <li><a href="#" className="hover:underline">Undang-undang Poppro</a></li>
               </ul>
@@ -146,7 +135,7 @@ export default function NewUserGuidePage() {
           
           <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-200 gap-6">
             <div className="text-[14px] text-gray-600 font-medium">
-              © 2025 Poppro
+              © {new Date().getFullYear()} Poppro
             </div>
             <div className="flex items-center gap-3">
               <a href="#" className="w-9 h-9 bg-black rounded-full flex items-center justify-center text-white hover:bg-gray-800 transition-colors">
@@ -168,4 +157,3 @@ export default function NewUserGuidePage() {
     </div>
   );
 }
-

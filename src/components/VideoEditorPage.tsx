@@ -35,7 +35,7 @@ export default function VideoEditorPage() {
           setCameraError(null);
         })
         .catch(err => {
-          console.error("Error accessing webcam:", err);
+          console.warn("Error accessing webcam (simulating fallback):", err.message);
           try {
             const canvas = document.createElement('canvas');
             canvas.width = 640;
@@ -79,7 +79,7 @@ export default function VideoEditorPage() {
               return;
             }
           } catch (fallbackErr) {
-            console.error("Fallback camera failed:", fallbackErr);
+            console.warn("Fallback camera failed:", fallbackErr);
           }
           setCameraError("Kamera tidak dijumpai. Sila pastikan peranti anda mempunyai kamera dan kebenaran telah diberikan.");
         });
@@ -96,7 +96,7 @@ export default function VideoEditorPage() {
     if (isRecording) {
       setIsRecording(false);
       setTimeout(() => {
-        setRecordedVideo('/1.mp4');
+        setRecordedVideo('/Upload/1.mp4');
         setActiveTab('edit');
       }, 500);
     } else {
@@ -130,7 +130,7 @@ export default function VideoEditorPage() {
                   className="flex flex-col items-center gap-2 min-w-[70px]"
                 >
                   <div className={`w-14 h-14 rounded-full border-2 ${selectedFilter === f.id ? 'border-[var(--primary-green)]' : 'border-transparent'} overflow-hidden`}>
-                    <img src="/1.mp4" alt={f.name} className="w-full h-full object-cover" style={{ filter: f.css }} />
+                    <img src="/Upload/1.mp4" alt={f.name} className="w-full h-full object-cover" style={{ filter: f.css }} />
                   </div>
                   <span className={`text-xs ${selectedFilter === f.id ? 'text-[var(--primary-green)] font-bold' : 'text-white'}`}>{f.name}</span>
                 </button>
@@ -236,7 +236,7 @@ export default function VideoEditorPage() {
       </div>
 
       <div className="flex-1 relative flex items-center justify-center bg-[#111] overflow-hidden">
-        <div className={`relative w-full max-w-md aspect-[9/16] bg-black rounded-xl overflow-hidden shadow-2xl ${isGreenScreen ? 'bg-green-500' : ''}`}>
+        <div className={`relative w-[488px] h-[878px] bg-black rounded-xl overflow-hidden shadow-2xl ${isGreenScreen ? 'bg-green-500' : ''}`}>
           
           {isGreenScreen && (
             <img src="https://picsum.photos/seed/bg/800/1200" className="absolute inset-0 w-full h-full object-cover opacity-80" alt="GS BG" />
@@ -251,12 +251,12 @@ export default function VideoEditorPage() {
 
           {duetMode === 'left-right' && (
             <div className="absolute inset-0 w-1/2 border-r border-white/20">
-              <video src="/2.mp4" className="w-full h-full object-cover" autoPlay loop muted />
+              <video src="/Upload/2.mp4" className="w-full h-full object-cover" autoPlay loop muted />
             </div>
           )}
           {duetMode === 'top-bottom' && (
             <div className="absolute inset-0 h-1/2 border-b border-white/20">
-              <video src="/2.mp4" className="w-full h-full object-cover" autoPlay loop muted />
+              <video src="/Upload/2.mp4" className="w-full h-full object-cover" autoPlay loop muted />
             </div>
           )}
 
@@ -371,11 +371,11 @@ export default function VideoEditorPage() {
             <div className="w-full max-w-md h-12 bg-white/10 rounded-lg border border-white/20 flex items-center px-2 overflow-hidden relative">
               <div className="absolute left-1/3 top-0 bottom-0 w-1 bg-white z-10 shadow-[0_0_10px_white]"></div>
               <div className="h-8 bg-[var(--primary-green)]/30 w-full rounded flex items-center overflow-hidden">
-                <img src="/1.mp4" className="h-full w-12 object-cover opacity-50" />
-                <img src="/1.mp4" className="h-full w-12 object-cover opacity-50" />
-                <img src="/1.mp4" className="h-full w-12 object-cover opacity-50" />
-                <img src="/1.mp4" className="h-full w-12 object-cover opacity-50" />
-                <img src="/1.mp4" className="h-full w-12 object-cover opacity-50" />
+                <img src="/Upload/1.mp4" className="h-full w-12 object-cover opacity-50" />
+                <img src="/Upload/1.mp4" className="h-full w-12 object-cover opacity-50" />
+                <img src="/Upload/1.mp4" className="h-full w-12 object-cover opacity-50" />
+                <img src="/Upload/1.mp4" className="h-full w-12 object-cover opacity-50" />
+                <img src="/Upload/1.mp4" className="h-full w-12 object-cover opacity-50" />
               </div>
             </div>
           )}

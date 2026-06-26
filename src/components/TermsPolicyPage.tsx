@@ -48,7 +48,7 @@ export default function TermsPolicyPage() {
               <div className="hidden md:block"></div>
 
               <button onClick={() => navigate('/new-user-guide')} className="hover:text-[var(--text-main)] text-left block">Garis Panduan Komuniti</button>
-              <button className="hover:text-[var(--text-main)] text-left block uppercase">Hak cipta</button>
+              <button onClick={() => navigate('/intellectual-property')} className="hover:text-[var(--text-main)] text-left block uppercase">Hak cipta</button>
               <div className="hidden md:block"></div>
 
               <button className="hover:text-[var(--text-main)] text-left block md:col-span-2">Garis Panduan Penguatkuasaan Undang-undang</button>

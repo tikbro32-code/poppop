@@ -38,7 +38,7 @@ export default function LoginPage() {
       await login(providerName);
       navigate('/');
     } catch (err: any) {
-      console.error("Login Error:", err);
+      console.warn("Login Error:", err.message);
       setError(err.message || "Failed to log in. Please try again.");
     } finally {
       setIsLoading(false);
@@ -109,8 +109,13 @@ export default function LoginPage() {
           <h1 className="text-[32px] font-bold text-center mb-10 text-black">Log in to Poppro</h1>
 
           {error && (
-            <div className="w-full mb-6 p-3 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm text-center">
-              {error}
+            <div className="w-full mb-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-600 text-sm flex flex-col gap-3">
+              <p className="font-bold text-center">
+                Login Error
+              </p>
+              <p className="text-xs leading-relaxed text-center">
+                {error}
+              </p>
             </div>
           )}
 

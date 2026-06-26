@@ -130,7 +130,7 @@ export default function ProfilePage() {
                     Manage Videos
                   </button>
                   <button 
-                    onClick={() => setIsSettingsOpen(true)}
+                    onClick={() => navigate('/settings')}
                     className="p-2 bg-[var(--sidebar-bg)] hover:bg-[var(--bg-dark)] border border-[var(--border-color)] rounded-lg transition-colors"
                   >
                     <Settings size={20} />
@@ -243,63 +243,6 @@ export default function ProfilePage() {
           </div>
         )}
       </div>
-
-      <AnimatePresence>
-        {isSettingsOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsSettingsOpen(false)} />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-md bg-[var(--bg-main)] rounded-2xl shadow-2xl border border-[var(--border-color)] overflow-hidden"
-            >
-              <div className="flex items-center justify-between p-4 border-b border-[var(--border-color)]">
-                <h2 className="text-xl font-bold">Settings</h2>
-                <button 
-                  onClick={() => setIsSettingsOpen(false)}
-                  className="p-2 hover:bg-[var(--sidebar-bg)] rounded-full transition-colors"
-                >
-                  <X size={20} />
-                </button>
-              </div>
-              
-              <div className="p-4 space-y-6">
-                <div>
-                  <h3 className="text-lg font-semibold mb-4">Privacy</h3>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium">Private account</p>
-                      <p className="text-sm text-[var(--text-secondary)] mt-1">
-                        With a private account, only users you approve can follow you and watch your videos.
-                      </p>
-                    </div>
-                    <button 
-                      onClick={() => setIsPrivateAccount(!isPrivateAccount)}
-                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${isPrivateAccount ? 'bg-[var(--primary-green)]' : 'bg-[var(--sidebar-bg)]'}`}
-                    >
-                      <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${isPrivateAccount ? 'translate-x-6' : 'translate-x-1'}`} />
-                    </button>
-                  </div>
-                </div>
-                
-                <div className="pt-4 border-t border-[var(--border-color)]">
-                  <button 
-                    onClick={() => {
-                      setIsSettingsOpen(false);
-                      logout();
-                      navigate('/');
-                    }}
-                    className="w-full py-3 text-red-500 font-bold hover:bg-red-500/10 rounded-xl transition-colors"
-                  >
-                    Log out
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

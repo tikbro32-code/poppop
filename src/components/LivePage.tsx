@@ -57,7 +57,7 @@ export default function LivePage() {
         <div className="relative w-full h-[70vh] min-h-[500px] bg-[#1a1a1a] rounded-xl overflow-hidden flex justify-center items-center group">
           <div className="absolute inset-0 opacity-40">
             <video 
-              src="/1.mp4" 
+              src="/Upload/1.mp4" 
               className="w-full h-full object-cover blur-3xl scale-110"
               autoPlay muted loop playsInline
             />
@@ -66,7 +66,7 @@ export default function LivePage() {
           <div className="relative h-full aspect-[9/16] bg-black shadow-2xl">
             <video 
               ref={videoRef}
-              src="/1.mp4" 
+              src="/Upload/1.mp4" 
               className="w-full h-full object-cover"
               autoPlay muted={isMuted} loop playsInline
             />
@@ -130,7 +130,7 @@ export default function LivePage() {
             {[2, 3, 4, 5, 6].map((num) => (
               <div key={num} className="relative aspect-[16/9] md:aspect-[9/16] rounded-xl overflow-hidden group cursor-pointer bg-[var(--sidebar-bg)]">
                 <video 
-                  src={`/${num}.mp4`} 
+                  src={`/Upload/${num}.mp4`} 
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   muted loop playsInline
                   onMouseEnter={(e) => e.currentTarget.play()}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Shield, Users, Lock, Eye, Menu, X, Play, Info, ArrowRight, ChevronRight, Search, Globe, ArrowLeft, ChevronDown } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Logo from './Logo';
 
 export default function SafetyPage() {
@@ -41,12 +41,12 @@ export default function SafetyPage() {
                         <ul className="space-y-3">
                           {['Panduan Pengguna Baharu', 'Tetapan Privasi & Kandungan', 'Menyesuaikan Paparan Untuk Anda', 'Cara Berkongsi Cerita Anda dengan Selamat', 'Cara Melaporkan', 'Panduan Keterangkuman & Kekitaan', 'Panduan Kesejahteraan', 'Panduan Maklumat Salah yang Memudaratkan'].map(item => (
                             <li key={item}>
-                              <a 
-                                href={item === 'Panduan Pengguna Baharu' ? '/new-user-guide' : item === 'Tetapan Privasi & Kandungan' ? '/privacy-settings' : item === 'Menyesuaikan Paparan Untuk Anda' ? '/customizing-feed' : '#'} 
+                              <Link 
+                                to={item === 'Panduan Pengguna Baharu' ? '/new-user-guide' : item === 'Tetapan Privasi & Kandungan' ? '/privacy-settings' : item === 'Menyesuaikan Paparan Untuk Anda' ? '/customizing-feed' : item === 'Cara Berkongsi Cerita Anda dengan Selamat' ? '/safe-sharing' : item === 'Cara Melaporkan' ? '/reporting' : item === 'Panduan Maklumat Salah yang Memudaratkan' ? '/harmful-misinformation' : item === 'Panduan Kesejahteraan' ? '/wellbeing-guide' : item === 'Panduan Keterangkuman & Kekitaan' ? '/inclusivity-guide' : '#'}
                                 className="text-[var(--text-secondary)] hover:text-[var(--primary-green)] transition-colors block py-1"
                               >
                                 {item}
-                              </a>
+                              </Link>
                             </li>
                           ))}
                         </ul>
@@ -56,15 +56,14 @@ export default function SafetyPage() {
                         <div className="space-y-4">
                           <h4 className="text-[var(--text-main)] font-bold text-xs tracking-wider">REMAJA & PENJAGA</h4>
                           <ul className="space-y-3">
-                            {['Pusat Keselamatan Remaja', 'Panduan Penjaga'].map(item => (
-                              <li key={item}><a href="#" className="text-[var(--text-secondary)] hover:text-[var(--primary-green)] transition-colors block py-1">{item}</a></li>
-                            ))}
+                            <li><Link to="/youth-safety-center" className="text-[var(--text-secondary)] hover:text-[var(--primary-green)] transition-colors block py-1">Pusat Keselamatan Remaja</Link></li>
+                            <li><Link to="/guardians-guide" className="text-[var(--text-secondary)] hover:text-[var(--primary-green)] transition-colors block py-1">Panduan Penjaga</Link></li>
                           </ul>
                         </div>
                         <div className="space-y-4">
                           <h4 className="text-[var(--text-main)] font-bold text-xs tracking-wider">LIVE</h4>
                           <ul className="space-y-3">
-                            <li><a href="#" className="text-[var(--text-secondary)] hover:text-[var(--primary-green)] transition-colors block py-1">Panduan Keselamatan LIVE</a></li>
+                            <li><Link to="/live-safety-guide" className="text-[var(--text-secondary)] hover:text-[var(--primary-green)] transition-colors block py-1">Panduan Keselamatan LIVE</Link></li>
                           </ul>
                         </div>
                       </div>
@@ -210,7 +209,7 @@ export default function SafetyPage() {
               <div className="hidden md:block"></div>
 
               <button onClick={() => navigate('/new-user-guide')} className="hover:text-[var(--text-main)] text-left block">Garis Panduan Komuniti</button>
-              <button className="hover:text-[var(--text-main)] text-left block">Hak cipta</button>
+              <button onClick={() => navigate('/intellectual-property')} className="hover:text-[var(--text-main)] text-left block">Hak cipta</button>
               <div className="hidden md:block"></div>
 
               <button className="hover:text-[var(--text-main)] text-left block md:col-span-2">Garis Panduan Penguatkuasaan Undang-undang</button>
